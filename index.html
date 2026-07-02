@@ -247,7 +247,7 @@ function AuthScreen({ supabase }) {
     setMode("login");
     setErr("");
     setMsg("");
-  }, style: { color: C.accent, cursor: "pointer", fontWeight: 600 } }, "\u30ED\u30B0\u30A4\u30F3"))), /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center", marginTop: 18, paddingTop: 14, borderTop: `1px solid ${C.border}` } }, /* @__PURE__ */ React.createElement(
+  }, style: { color: C.accent, cursor: "pointer", fontWeight: 600 } }, "\u30ED\u30B0\u30A4\u30F3"))), /* @__PURE__ */ React.createElement("div", { style: { textAlign: "center", marginTop: 18, paddingTop: 14, borderTop: `1px solid ${C.border}`, display: "none" } }, /* @__PURE__ */ React.createElement(
     "span",
     {
       onClick: () => {
@@ -699,15 +699,16 @@ function MainApp({ supabase, session, onLogout }) {
     })));
   }))));
 }
+const DEFAULT_SUPABASE_URL = "https://pmwxspnanbetcycowcgm.supabase.co";
+const DEFAULT_SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBtd3hzcG5hbmJldGN5Y293Y2dtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI4ODk2MDQsImV4cCI6MjA5ODQ2NTYwNH0.O6lPcoOILeMuem3X8Ab7qDDt2UAbKfzBVtLcNCXirWg";
 function Root() {
   const [config, setConfig] = useState(null);
   const [supabase, setSupabase] = useState(null);
   const [session, setSession] = useState(void 0);
   useEffect(() => {
-    const url = localStorage.getItem("sb_url");
-    const key = localStorage.getItem("sb_key");
-    if (url && key) setConfig({ url, key });
-    else setConfig(false);
+    const url = localStorage.getItem("sb_url") || DEFAULT_SUPABASE_URL;
+    const key = localStorage.getItem("sb_key") || DEFAULT_SUPABASE_KEY;
+    setConfig({ url, key });
   }, []);
   useEffect(() => {
     if (!config) return;
